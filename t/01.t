@@ -7,19 +7,6 @@ BEGIN {
 	plan $@ ? (skip_all => 'needs DBD::Mock for testing') : (tests => 1);
 }
 
-package Class::DBI::Search::Test::Limited;
-
-use base 'Class::DBI::Search::Basic';
-
-sub fragment {
-  my $self = shift;
-  my $frag = $self->SUPER::fragment;
-  if (defined(my $limit = $self->opt('limit'))) {
-    $frag .= " LIMIT $limit";
-  }
-  return $frag;
-}
-
 package My::Mock;
 
 use base 'Class::DBI';
@@ -27,8 +14,7 @@ use base 'Class::DBI';
 __PACKAGE__->connection('DBI:Mock:', '', '');
 __PACKAGE__->table('faked');
 __PACKAGE__->columns(All => qw/title year rating/);
-
-__PACKAGE__->add_searcher(search => "Class::DBI::Search::Test::Limited");
+__PACKAGE__->add_searcher(search => "Class::DBI::Search::LIMITed");
 
 package main;
 

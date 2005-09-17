@@ -1,6 +1,6 @@
 package Class::DBI::Search::LIMITed;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 use strict;
 use warnings;
